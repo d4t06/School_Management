@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { useAuthStore } from "../stores/AuthContext"
+import Image from "./Image"
 
 function Header() {
+  const {userInfo} = useAuthStore()
   return (
     <div className='h-[50px] border-b border-[#000.1] px-[10px] flex justify-between items-center'>
         <Link to={'/'}>
@@ -8,8 +11,10 @@ function Header() {
         </Link>
 
         <div className="flex items-center">
-          <h2>Nguyễn Văn A</h2>
-          <div className="ml-[8px] w-[30px] h-[30px] bg-[#ccc] rounded-full"></div>
+          <h2>{userInfo.display_name}</h2>
+          <div className="ml-[8px] w-[30px] h-[30px] rounded-full overflow-hidden">
+           <Image src={userInfo.image_url}  />
+          </div>
         </div>
     </div>
   )

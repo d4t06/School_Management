@@ -6,6 +6,7 @@ import {
    StudentDetail,
    GradeDetail,
    Teacher,
+   Login,
 } from "../pages";
 
 const routes = {
@@ -16,6 +17,7 @@ const routes = {
    GradeDetail: "/grade/:id",
    Subject: "/subject",
    Teacher: "/teacher",
+   Login: "/login",
 };
 
 const publicRoutes = [
@@ -26,6 +28,7 @@ const publicRoutes = [
    { path: routes.GradeDetail, component: GradeDetail },
    { path: routes.Subject, component: Subject },
    { path: routes.Teacher, component: Teacher },
+   { path: routes.Login, component: Login },
 ];
 
 export { publicRoutes };
