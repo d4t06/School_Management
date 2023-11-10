@@ -1,3 +1,7 @@
 export {default as Home} from "./Home"
 export {default as Student} from "./Student"
+export {default as StudentDetail} from "./StudentDetail"
 export {default as Grade} from "./Grade"
+export {default as Subject} from "./Subject"
+export {default as GradeDetail} from "./GradeDetail"
+export {default as Teacher} from "./Teacher"

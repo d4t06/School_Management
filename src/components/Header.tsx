@@ -9,7 +9,7 @@ function Header() {
 
         <div className="flex items-center">
           <h2>Nguyễn Văn A</h2>
-          <div className="ml-[8px] w-[34px] h-[34px] bg-[#ccc] rounded-full"></div>
+          <div className="ml-[8px] w-[30px] h-[30px] bg-[#ccc] rounded-full"></div>
         </div>
     </div>
   )
