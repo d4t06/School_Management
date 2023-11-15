@@ -7,6 +7,7 @@ import {
    GradeDetail,
    Teacher,
    Login,
+   Account,
 } from "../pages";
 
 const routes = {
@@ -18,6 +19,7 @@ const routes = {
    Subject: "/subject",
    Teacher: "/teacher",
    Login: "/login",
+   Account: "/account",
 };
 
 const publicRoutes = [
@@ -29,6 +31,7 @@ const publicRoutes = [
    { path: routes.Subject, component: Subject },
    { path: routes.Teacher, component: Teacher },
    { path: routes.Login, component: Login },
+   { path: routes.Account, component: Account },
 ];
 
 export { publicRoutes };

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Teacher() {
    const classes = {
       label: "text-[14px]",
-      th: "bg-[#cd1818] text-[#fff] font-medium text-left px-[6px]",
+      th: "bg-slate-800 text-[#fff] font-medium text-left px-[6px]",
       td: "px-[6px] py-[4px] border-b",
       input: "w-[200px] outline-none h-[28px] px-[10px] rounded-[4px] border-[1px] text-[#000]",
    };
@@ -46,7 +46,7 @@ function Teacher() {
                   <td className={classes.td}>B2110118</td>
                   <td className={classes.td}>
                      <Link
-                        className="w-full hover:text-[#cd1818]"
+                        className="w-full hover:text-slate-800"
                         to={"/student/B2110118"}
                      >
                         Nguyễn Văn A

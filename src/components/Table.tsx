@@ -11,7 +11,7 @@ type Props = {
 function Table({colList, children}: Props) {
 
    const classes = {
-      th: "bg-[#cd1818] text-[#fff] font-medium text-left px-[6px]",
+      th: "bg-slate-800 text-[#fff] font-medium text-left px-[6px]",
    }
   return (
 <table className="w-full">

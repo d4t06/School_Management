@@ -17,12 +17,12 @@ export type StudentType = {
   mother_phone_number: string;
 };
 
-export type User = {
+export type Account = {
   email: string;
-  role: "R1" | "R2" | "R3";
+  // role: "R1" | "R2" | "R3";
   display_name: string;
-  latest_seen: Timestamp;
   image_url: string;
+  latest_seen: Timestamp;
 };
 
 export type Teacher = {

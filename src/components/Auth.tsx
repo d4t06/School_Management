@@ -1,24 +1,43 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/app";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { mySetDoc } from "../utils/firebaseHelpers";
 import { useAuthStore } from "../stores/AuthContext";
 import { Login } from "../pages";
 import { sleep } from "../utils/appHelper";
 import loadingGif from "../assets/loading.gif";
+import { getAllAccounts } from "../services/AccountServices";
+import { signOut } from "firebase/auth";
 
 export default function Auth({ children }: { children: ReactNode }) {
   const [loggedInUser, loading] = useAuthState(auth);
   const { setUserInfo, userInfo } = useAuthStore();
+  const [error, setError] = useState(false);
   const RanAuth = useRef(false);
 
   const handleUserLogged = async () => {
     try {
+      const allAccounts = await getAllAccounts();
+      if (!allAccounts) {
+        setError(true);
+        return;
+      }
+      const index = allAccounts.find((acc) => loggedInUser?.email === acc.email);
+
+      console.log('checj index', index);
+      
+      if (!index) {
+        await signOut(auth);
+
+        setError(true);
+        return;
+      }
+
       await sleep(2000);
 
       await mySetDoc({
-        collection: "users",
+        collection: "accounts",
         data: {
           email: loggedInUser?.email,
           latest_seen: serverTimestamp(),
@@ -29,11 +48,14 @@ export default function Auth({ children }: { children: ReactNode }) {
       });
 
       // await sleep(1000);
+
+      console.log('code runing');
+      
       setUserInfo({
         status: "finish",
         email: loggedInUser?.email as string,
         display_name: loggedInUser?.displayName as string,
-        image_url: loggedInUser?.photoURL as string
+        image_url: loggedInUser?.photoURL as string,
       });
     } catch (error) {
       console.log(error);
@@ -41,6 +63,7 @@ export default function Auth({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    if (error) return;
     if (loading) return;
 
     if (loggedInUser && !RanAuth.current) {
@@ -48,6 +71,8 @@ export default function Auth({ children }: { children: ReactNode }) {
       handleUserLogged();
     }
   }, [loggedInUser, loading]);
+
+  if (error) return <h1 className="text-center">Forbidden</h1>;
 
   if (loading || (loggedInUser && userInfo.status === "loading"))
     return (

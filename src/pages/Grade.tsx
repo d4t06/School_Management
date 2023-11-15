@@ -4,7 +4,7 @@ function Grade() {
    const classes = {
       boxWrapper:
          "w-[20%]  text-[#fff] px-[8px] transition-transform   hover:translate-y-[-5px]",
-      boxPD: "pt-[100%] rounded-[8px] relative w-full bg-[#cd1818]",
+      boxPD: "pt-[100%] rounded-[8px] relative w-full bg-slate-800",
       boxContent: "absolute inset-0 flex flex-col items-center justify-center",
       largeText: "text-[30px] font-bold",
    };

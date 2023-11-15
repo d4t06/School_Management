@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default function LinkItem({ className, icon, label, to }: Props) {
+
+
   return (
     <Link
       className={"w-full flex flex-row justify-between items-center group " + className}
@@ -16,7 +18,7 @@ export default function LinkItem({ className, icon, label, to }: Props) {
     >
       <div className="inline-flex gap-[6px] group-hover:text-[#cd1818]">
         {icon}
-        <span className="text-[14px] font-medium">{label}</span>
+        <span className="text-[14px] font-semibold">{label}</span>
       </div>
     </Link>
   );
