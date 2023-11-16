@@ -22,6 +22,7 @@ export const initAccountObject = ({ ...values }: Partial<Account>) => {
       email: "",
       latest_seen: Timestamp.fromDate(new Date()),
       display_name: "",
+      role: "R1",
       image_url: "",
       ...values,
    };

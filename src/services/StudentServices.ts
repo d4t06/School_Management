@@ -32,7 +32,7 @@ export const initStudentObject = ({ ...values }: Partial<StudentType>) => {
    const data: StudentType = {
       id: "",
       address_id: "",
-      birthday: Timestamp.fromDate(new Date("2023-11-16")),
+      birthday: Timestamp.fromDate(new Date()),
       class_id: "",
       GPA: 0,
       father_full_name: "",

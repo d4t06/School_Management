@@ -19,7 +19,7 @@ export type StudentType = {
 
 export type Account = {
   email: string;
-  // role: "R1" | "R2" | "R3";
+  role: "R1" | "R2" | "R3";
   display_name: string;
   image_url: string;
   latest_seen: Timestamp;
@@ -27,10 +27,11 @@ export type Account = {
 
 export type TeacherType = {
   id: string;
+  email: string;
   full_name: string;
   phone_number: string;
   gender: "male" | "female" | "others";
-  birthday: Date;
+  birthday: Timestamp;
   address_id: string;
   subjects_ids: string[];
 };
@@ -40,11 +41,13 @@ export type Subject = {
   name: string;
 };
 
-export type Class = {
+export type ClassRoom = {
   id: string;
   teacher_id: string;
   className: string;
   grade_id: string;
+  capacity: number;
+  school_year_id: string;
 };
 
 export type Grade = {
@@ -57,6 +60,13 @@ export type Address = {
   province: string;
   district: string;
   ward: string;
+};
+
+export type SchoolYear = {
+  id: string;
+  name: string;
+  start_date: Timestamp;
+  end_date: Timestamp;
 };
 
 export type Toast = {
@@ -78,3 +88,6 @@ export type ThemeType = {
   content_bg: string;
   content_hover_bg: string;
 };
+
+
+export type CollectionVariants = "students" | "classes" | "scores" | "teachers" | "accounts" | "school_years";

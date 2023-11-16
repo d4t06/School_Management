@@ -1,15 +1,15 @@
+import { CollectionVariants } from "@/types";
 import { db } from "../config/app";
 import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 
 const isDev: boolean = !!import.meta.env.DEV;
-type collectionVariant = "students" | "classes" | "scores" | "teachers" | "accounts";
 
 export const myDeleteDoc = async ({
    collection,
    id,
    msg,
 }: {
-   collection: collectionVariant;
+   collection: CollectionVariants;
    id: string;
    msg?: string;
 }) => {
@@ -22,7 +22,7 @@ export const myGetDoc = async ({
    id,
    msg,
 }: {
-   collection: collectionVariant;
+   collection: CollectionVariants;
    id: string;
    msg?: string;
 }) => {
@@ -37,7 +37,7 @@ export const mySetDoc = async ({
    data,
    msg,
 }: {
-   collection: collectionVariant;
+   collection: CollectionVariants;
    id: string;
    data: {};
    msg?: string;

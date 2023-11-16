@@ -36,7 +36,7 @@ function Sidebar() {
           label="Học sinh"
         />
         <MenuItem
-          to="/grade"
+          to="/class"
           icon={<BuildingLibraryIcon className="w-[18px]" />}
           label="Lớp học"
         />

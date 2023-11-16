@@ -82,7 +82,7 @@ function StudentDetail() {
 
    return (
       <div>
-         <Navigation />
+         <Navigation className="mb-[30px]"/>
 
          <div
             className={`flex gap-[20px] ${

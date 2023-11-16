@@ -1,23 +1,14 @@
 import { Timestamp } from "firebase/firestore";
-import { Teacher, User } from "../types";
+import { TeacherType, Account } from "../types";
 import { ReactNode, createContext, useCallback, useContext, useReducer } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/app";
-import { useNavigate } from "react-router-dom";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 // 1 initial state
-type StateType = { userInfo: User & { status: "finish" | "loading" | "error" } };
+type StateType = { userInfo: Account & { status: "finish" | "loading" | "error" } };
 const initialState: StateType = {
   userInfo: {
-    // image_url: ''
-    //  address_id: "adf",
-    //  birthday: new Date(),
-    //  full_name: "",
-    //  gender: "male",
-    //  image_url: "",
-    //  phone_number: "",
-    //  subjects_ids: [],
     image_url: "",
     status: "loading",
     display_name: "",
