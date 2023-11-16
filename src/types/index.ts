@@ -8,7 +8,7 @@ export type StudentType = {
   gender: "male" | "female" | "others";
   class_id: string;
   GPA: number;
-  birthday: Date;
+  birthday: Timestamp;
   placeOfBirth: string;
   address_id: string;
   father_full_name: string;
@@ -25,7 +25,7 @@ export type Account = {
   latest_seen: Timestamp;
 };
 
-export type Teacher = {
+export type TeacherType = {
   id: string;
   full_name: string;
   phone_number: string;

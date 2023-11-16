@@ -11,7 +11,7 @@ import { myDeleteDoc, myGetDoc } from "../utils/firebaseHelpers";
 import ConfirmModal from "../components/modals/ConfirmModal";
 import { editStudent, getStudent, initStudentObject } from "../services/StudentServices";
 
-function StudentDetail() {
+function TeacherDetail() {
    const [edit, setEdit] = useState(false);
    const [student, setStudent] = useState<StudentType>(initStudentObject({}));
 
@@ -45,7 +45,7 @@ function StudentDetail() {
 
    const deleteStudent = async () => {
       setLoading(true);
-      await myDeleteDoc({ collection: "students", id: param.id as string });
+      await myDeleteDoc({ collection: "teachers", id: param.id as string });
       setLoading(false);
       navigate("/student");
    };
@@ -179,4 +179,4 @@ function StudentDetail() {
    );
 }
 
-export default StudentDetail;
+export default TeacherDetail;

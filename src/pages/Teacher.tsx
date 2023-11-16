@@ -1,8 +1,32 @@
-import React, { FormEvent } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Table from "../components/Table";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../components";
+import { TeacherType } from "../types";
+import { generateQueryString } from "../utils/appHelper";
+import { getDocs } from "firebase/firestore";
 
 function Teacher() {
+   const navigate = useNavigate();
+   const [teachers, setTeachers] = useState<TeacherType[]>([]);
+   const ranUseEffect = useRef(false);
+
+   useEffect(() => {
+      const getTeachers = async () => {
+         const queryGetAllTeachers = generateQueryString("teachers");
+         const teacherSnapshot = await getDocs(queryGetAllTeachers);
+
+         if (teacherSnapshot.docs.length) {
+            const teachers = teacherSnapshot.docs.map((doc) => doc.data() as TeacherType);
+            setTeachers(teachers);
+         }
+      };
+      if (!ranUseEffect.current) {
+         getTeachers();
+         ranUseEffect.current = true;
+      }
+   }, []);
+
    const classes = {
       label: "text-[14px]",
       th: "bg-slate-800 text-[#fff] font-medium text-left px-[6px]",
@@ -18,43 +42,54 @@ function Teacher() {
 
    return (
       <div className="">
-         <form onSubmit={handleSubmit} action="" className="">
-            <div className="flex gap-[12px]">
-               <div className="flex flex-col">
-                  <label htmlFor="maSo" className={classes.label}>
-                     Mã số giáo viên:
-                  </label>
-                  <input
-                     type="text"
-                     id="maSo"
-                     className={classes.input}
-                     placeholder="B21101"
-                  />
-               </div>
+         <div className="flex items-center justify-between">
+            <div className="">
+               <form onSubmit={handleSubmit} action="" className="">
+                  <div className="flex gap-[12px]">
+                     <div className="flex flex-col">
+                        <label htmlFor="maSo" className={classes.label}>
+                           Mã số giáo viên:
+                        </label>
+                        <input
+                           type="text"
+                           id="maSo"
+                           className={classes.input}
+                           placeholder="B21101"
+                        />
+                     </div>
+                  </div>
+               </form>
+
+               <button className="py-[4px] mb-[30px] px-[10px] bg-emerald-500 text-white rounded-[6px] mt-[8px]">
+                  Kết quả: 10
+               </button>
             </div>
-         </form>
+            <div className="flex">
+               <Button
+                  onClick={() => navigate("/add-teacher")}
+                  className="bg-slate-800 "
+                  variant="primary"
+               >
+                  Thêm giáo viên
+               </Button>
+            </div>
+         </div>
 
-         <button className="py-[4px] mb-[30px] px-[10px] bg-emerald-500 text-white rounded-[6px] mt-[8px]">
-            Kết quả: 10
-         </button>
-
-         <Table
-            colList={["Mã số GV", "Họ và tên", "Giới tính", "Ngày sinh", "Nơi sinh"]}
-         >
-            {[...Array(10).keys()].map((item, index) => (
+         <Table colList={["Mã số GV", "Họ và tên", "Giới tính", "Ngày sinh", "Nơi sinh"]}>
+            {teachers.map((item, index) => (
                <tr key={index}>
-                  <td className={classes.td}>B2110118</td>
+                  <td className={classes.td}>{item.id}</td>
                   <td className={classes.td}>
                      <Link
                         className="w-full hover:text-slate-800"
-                        to={"/student/B2110118"}
+                        to={`/teacher/${item.id}`}
                      >
-                        Nguyễn Văn A
+                        {item.full_name}
                      </Link>
                   </td>
-                  <td className={classes.td}>Nam</td>
-                  <td className={classes.td}>10/7/2003</td>
-                  <td className={classes.td}>An Giang</td>
+                  <td className={classes.td}>-</td>
+                  <td className={classes.td}>-</td>
+                  <td className={classes.td}>-</td>
                </tr>
             ))}
          </Table>

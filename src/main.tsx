@@ -5,18 +5,18 @@ import "./index.css";
 import ThemeProvider from "./stores/ThemeContext.tsx";
 import AuthProvider from "./stores/AuthContext.tsx";
 import ToastProvider from "./stores/ToastContext.tsx";
-import Auth from "./components/Auth.tsx";
+// import Auth from "./components/Auth.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <AuthProvider>
-        <ToastProvider>
-          <Auth>
-            <App />
-          </Auth>
-        </ToastProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+   <React.StrictMode>
+      <ThemeProvider>
+         <AuthProvider>
+            <ToastProvider>
+               {/* <Auth> */}
+               <App />
+               {/* </Auth> */}
+            </ToastProvider>
+         </AuthProvider>
+      </ThemeProvider>
+   </React.StrictMode>
 );

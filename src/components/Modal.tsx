@@ -22,7 +22,7 @@ const Modal: FC<Props> = ({ children, setOpenModal }) => {
             className="absolute bg-black opacity-60 inset-0 z-[90]"
           ></div>
           <div className="absolute z-[99] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="px-[16px] py-[20px] bg-white rounded-[12px] shadow-lg">
+            <div className="px-[16px] py-[20px] bg-[#f1f1f1] rounded-[12px] shadow-lg">
               {children}
             </div>
           </div>

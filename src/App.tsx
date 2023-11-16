@@ -1,4 +1,6 @@
 import { DefaultLayout } from "./components";
+import Auth from "./components/Auth";
+import { Login } from "./pages";
 import { publicRoutes } from "./routes";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -7,6 +9,9 @@ function App() {
       <>
          <Router>
             <Routes>
+               <Route path={"/login"} element={<Login />} />
+
+               {/* <Route element={<Auth />}> */}
                {publicRoutes.map((item, index) => {
                   const Page = item.component;
 
@@ -22,6 +27,7 @@ function App() {
                      />
                   );
                })}
+               {/* </Route> */}
             </Routes>
          </Router>
       </>
