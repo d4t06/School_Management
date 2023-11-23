@@ -1,11 +1,10 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { StudentType } from "../types/index";
 import Table from "../components/Table";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components";
 import { getAllStudent } from "../services/StudentServices";
 import { convertTimestampToString } from "../utils/appHelper";
-import { Timestamp } from "firebase/firestore";
 import { PlusSmallIcon } from "@heroicons/react/24/outline";
 
 function Student() {

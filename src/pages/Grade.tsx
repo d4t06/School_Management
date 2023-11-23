@@ -21,7 +21,7 @@ function Grade() {
           <div className={classes.boxPD}>
             <div className={classes.boxContent}>
               <h1 className={classes.largeText}>Khối 1</h1>
-              <h5>2 Lớp</h5>
+              {/* <h5>2 Lớp</h5> */}
             </div>
           </div>
         </Link>
@@ -30,7 +30,7 @@ function Grade() {
           <div className={classes.boxPD}>
             <div className={classes.boxContent}>
               <h1 className={classes.largeText}>Khối 2</h1>
-              <h5>2 Lớp</h5>
+              {/* <h5>2 Lớp</h5> */}
             </div>
           </div>
         </Link>
@@ -39,7 +39,7 @@ function Grade() {
           <div className={classes.boxPD}>
             <div className={classes.boxContent}>
               <h1 className={classes.largeText}>Khối 3</h1>
-              <h5>2 Lớp</h5>
+              {/* <h5>2 Lớp</h5> */}
             </div>
           </div>
         </Link>
@@ -48,7 +48,7 @@ function Grade() {
           <div className={classes.boxPD}>
             <div className={classes.boxContent}>
               <h1 className={classes.largeText}>Khối 4</h1>
-              <h5>2 Lớp</h5>
+              {/* <h5>2 Lớp</h5> */}
             </div>
           </div>
         </Link>
@@ -57,7 +57,7 @@ function Grade() {
           <div className={classes.boxPD}>
             <div className={classes.boxContent}>
               <h1 className={classes.largeText}>Khối 5</h1>
-              <h5>2 Lớp</h5>
+              {/* <h5>2 Lớp</h5> */}
             </div>
           </div>
         </Link>

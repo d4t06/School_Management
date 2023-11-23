@@ -10,8 +10,10 @@ import {
   ChevronRightIcon,
   PlusSmallIcon,
 } from "@heroicons/react/24/outline";
+import { useToast } from "@/stores/ToastContext";
 
 function AddStudent() {
+  const { setSuccessToast, setErrorToast } = useToast();
   const [studentData, setStudentData] = useState<StudentType>(initStudentObject({}));
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,11 +24,17 @@ function AddStudent() {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    await mySetDoc({ collection: "students", data: studentData, id: studentData.id });
-
-    setLoading(false);
+      await mySetDoc({ collection: "students", data: studentData, id: studentData.id });
+      setSuccessToast({ message: "Thêm học sinh thành công" });
+    } catch (error) {
+      console.log(error);
+      setErrorToast({});
+    } finally {
+      setLoading(false);
+    }
   };
 
   const resetData = () => {
@@ -71,15 +79,13 @@ function AddStudent() {
           />
         </div>
 
-        <div className="flex gap-[10px]">
-          <Button
-            onClick={handleSubmit}
-            variant="primary"
-            className="bg-slate-800 text-white mt-[20px]"
-          >
-            <PlusSmallIcon className="w-[25px]" />
-            Thêm
-          </Button>
+        <div
+          className={`flex gap-[10px] ${
+            !studentData.full_name || !studentData.id
+              ? "opacity-[.6] pointer-events-none"
+              : ""
+          }`}
+        >
           <Button
             onClick={continueAddStudent}
             variant="primary"
@@ -88,6 +94,15 @@ function AddStudent() {
             <ChevronRightIcon className="w-[20px]" />
             Tiếp tục
           </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="primary"
+            className="bg-slate-800 text-white mt-[20px]"
+          >
+            <PlusSmallIcon className="w-[25px]" />
+            Thêm
+          </Button>
+
           <Button
             onClick={() => setIsOpenModal(true)}
             variant="primary"

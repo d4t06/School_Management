@@ -10,8 +10,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { myDeleteDoc, myGetDoc } from "../utils/firebaseHelpers";
 import ConfirmModal from "../components/modals/ConfirmModal";
 import { editStudent, getStudent, initStudentObject } from "../services/StudentServices";
+import { useToast } from "@/stores/ToastContext";
 
 function StudentDetail() {
+   const {setSuccessToast} = useToast()
    const [edit, setEdit] = useState(false);
    const [student, setStudent] = useState<StudentType>(initStudentObject({}));
 
@@ -47,6 +49,8 @@ function StudentDetail() {
       setLoading(true);
       await myDeleteDoc({ collection: "students", id: param.id as string });
       setLoading(false);
+
+      setSuccessToast({message: "Xóa học sinh thành công"})
       navigate("/student");
    };
 
@@ -145,8 +149,9 @@ function StudentDetail() {
                      value={student.full_name}
                   />
                   <MyInput
-                     readOnly={!edit}
-                     onChange={(e) => handleSetData("id", e.target.value)}
+                     readOnly
+                     className={`${edit ? 'opacity-[.6]': ''}`}
+                     // onChange={(e) => handleSetData("id", e.target.value)}
                      title="Mã số"
                      value={student.id}
                   />
@@ -171,6 +176,7 @@ function StudentDetail() {
                      loading={loading}
                      setOpenModal={setIsOpenModal}
                      callback={handleRetoreStudent}
+                     buttonLabel="Bỏ thay dối"
                   />
                )}
             </Modal>

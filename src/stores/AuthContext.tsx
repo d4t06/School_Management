@@ -1,9 +1,8 @@
 import { Timestamp } from "firebase/firestore";
-import { TeacherType, Account } from "../types";
+import { Account } from "../types";
 import { ReactNode, createContext, useCallback, useContext, useReducer } from "react";
-import { signOut } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../config/app";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 // 1 initial state
 type StateType = { userInfo: Account & { status: "finish" | "loading" | "error" } };
@@ -15,6 +14,7 @@ const initialState: StateType = {
     role: "R3",
     email: "",
     latest_seen: new Timestamp(0, 0),
+    teacher_id: "",
   },
 };
 
@@ -98,19 +98,22 @@ const useAuthStore = () => {
 
 const useAuthActions = () => {
   const { setUserInfo } = useAuthStore();
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
+
+  const provider = new GoogleAuthProvider();
+
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
 
   const logOut = async () => {
     await signOut(auth);
 
     // after set sign cause trigger auth useEffect and will update status to 'finish'
     setUserInfo(initialState.userInfo);
-
-    //  navigate("/");
   };
 
   const logIn = async () => {
-    const userCredential = await signInWithGoogle();
+    const userCredential = await signInWithPopup(auth, provider);
     //  reset song context
     if (userCredential) {
       // reset userInfo
