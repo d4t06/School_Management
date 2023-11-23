@@ -23,6 +23,7 @@ export type Account = {
   display_name: string;
   image_url: string;
   latest_seen: Timestamp;
+  teacher_id: string;
 };
 
 export type TeacherType = {

@@ -1,9 +1,4 @@
-import {
-   Timestamp,
-   collection,
-   getDocs,
-   query,
-} from "firebase/firestore";
+import { Timestamp, collection, getDocs, query } from "firebase/firestore";
 import { Account } from "../types";
 import { db } from "../config/app";
 
@@ -22,8 +17,9 @@ export const initAccountObject = ({ ...values }: Partial<Account>) => {
       email: "",
       latest_seen: Timestamp.fromDate(new Date()),
       display_name: "",
-      role: "R1",
+      role: "R2",
       image_url: "",
+      teacher_id: "",
       ...values,
    };
 

@@ -78,7 +78,7 @@ function StudentDetail() {
       setEdit(false);
    };
 
-   if (!student) return <h1>No student jet</h1>;
+   // if (!student) return <h1>No student jet</h1>;
 
    return (
       <div>

@@ -1,18 +1,14 @@
 function Home() {
-
-
-  const classes = {
-    boxWrapper: 'w-[20%]  text-[#fff] px-[8px] transition-transform   hover:translate-y-[-5px]',
-    boxPD: 'pt-[100%] rounded-[8px] relative w-full bg-slate-800',
-    boxContent: 'absolute inset-0 flex flex-col items-center justify-center',
-    largeText: 'text-[30px] font-bold'
-
-    
-  }
+   const classes = {
+      boxWrapper:
+         "w-[20%]  text-[#fff] px-[8px] transition-transform   hover:translate-y-[-5px]",
+      boxPD: "pt-[100%] rounded-[8px] relative w-full bg-slate-800",
+      boxContent: "absolute inset-0 flex flex-col items-center justify-center",
+      largeText: "text-[30px] font-bold",
+   };
    return (
       <div className="">
          <div className="flex -mx-[8px]">
-
             <div className={classes.boxWrapper}>
                <div className={classes.boxPD}>
                   <div className={classes.boxContent}>
@@ -39,9 +35,7 @@ function Home() {
                   </div>
                </div>
             </div>
-
          </div>
-            <h1>Slider</h1>
       </div>
    );
 }

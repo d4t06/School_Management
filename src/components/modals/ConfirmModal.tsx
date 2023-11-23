@@ -27,7 +27,7 @@ export default function ConfirmModal({
       >
          <h1 className="text-[20px] font-semibold">{label || "Wait a minute"}</h1>
          <p className=" text-[16px] font-semibold text-red-500">
-            {desc || "This action cannot be undone"}
+            {desc || "Dữ liệu sau khi xóa sẽ không thể khôi phục"}
          </p>
 
          <div className="flex gap-[10px] mt-[20px]">
@@ -36,14 +36,14 @@ export default function ConfirmModal({
                variant={"primary"}
                onClick={callback}
             >
-               {buttonLabel || "Yes please"}
+               {buttonLabel || "XÓA"}
             </Button>
             <Button
                onClick={() => setOpenModal(false)}
                className={`bg-slate-800 rounded-full`}
                variant={"primary"}
             >
-               Close
+               HỦY
             </Button>
          </div>
       </div>

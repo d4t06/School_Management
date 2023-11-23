@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useAuthActions } from "../stores/AuthContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/app";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components";
 
 function Login() {
    const { logIn } = useAuthActions();
    const [loggedInUser] = useAuthState(auth);
+
+   const navigate = useNavigate();
 
    const handleLogIn = async () => {
       try {
@@ -19,10 +21,11 @@ function Login() {
 
    useEffect(() => {
       if (loggedInUser?.email) {
-         <Navigate to="/" />;
+         navigate("/");
          return;
       }
-   }, []);
+      console.log("run effect");
+   }, [loggedInUser]);
 
    return (
       <div className="flex h-screen items-center justify-center">

@@ -12,7 +12,7 @@ function Header() {
       </Link>
 
       <div className="flex items-center">
-        <h2>{userInfo.display_name || "no user"}</h2>
+        <h2>{userInfo.display_name || "Nguyen Van A"}</h2>
         <div className="ml-[8px] w-[30px] h-[30px] rounded-full overflow-hidden">
           <Image src={userInfo.image_url} />
         </div>

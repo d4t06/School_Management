@@ -1,47 +1,31 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/app";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { mySetDoc } from "../utils/firebaseHelpers";
 import { useAuthStore } from "../stores/AuthContext";
 import { sleep } from "../utils/appHelper";
 import loadingGif from "../assets/loading.gif";
 import { getAllAccounts } from "../services/AccountServices";
-import { signOut } from "firebase/auth";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
 export default function Auth() {
    const [loggedInUser, loading] = useAuthState(auth);
    const { setUserInfo, userInfo } = useAuthStore();
-   const [error, setError] = useState(false);
    const RanAuth = useRef(false);
 
-   const Forbidden = (
-      <div className="flex items-center min-h-screen justify-center">
-         <h1 className="text-center text-[30px] border border-[#000] py-[4px] px-[16px]">
-            Hiện bạn không thể truy cập trang web này!
-         </h1>
-      </div>
-   );
+   const navigate = useNavigate();
 
    const handleUserLogged = async () => {
       try {
          const allAccounts = await getAllAccounts();
-         if (!allAccounts) {
-            setError(true);
-            return;
-         }
-         const index = allAccounts.find((acc) => loggedInUser?.email === acc.email);
+         if (!allAccounts) return navigate("/error");
 
-         if (!index) {
-            await signOut(auth);
+         const foundedAcc = allAccounts.find((acc) => loggedInUser?.email === acc.email);
+         if (!foundedAcc) return navigate("/unauthorized");
 
-            setError(true);
-            return;
-         }
-
-         await sleep(2000);
-
+         await sleep(1000);
+         // update user doc
          await mySetDoc({
             collection: "accounts",
             data: {
@@ -53,13 +37,13 @@ export default function Auth() {
             id: loggedInUser?.email as string,
          });
 
-         // await sleep(1000);
-
+         // update local user info
          setUserInfo({
             status: "finish",
             email: loggedInUser?.email as string,
             display_name: loggedInUser?.displayName as string,
             image_url: loggedInUser?.photoURL as string,
+            role: foundedAcc.role,
          });
       } catch (error) {
          console.log(error);
@@ -67,18 +51,24 @@ export default function Auth() {
    };
 
    useEffect(() => {
-      if (error) return;
       if (loading) return;
 
-      if (loggedInUser && !RanAuth.current) {
-         RanAuth.current = false;
+      if (!loggedInUser) {
+         setUserInfo({
+            status: "finish",
+         });
+
+         return;
+      }
+
+      if (!RanAuth.current) {
+         RanAuth.current = true;
+
          handleUserLogged();
       }
-   }, [loggedInUser, loading]);
+   }, [loading]);
 
-   if (error) return Forbidden;
-
-   if (loading || (loggedInUser && userInfo.status === "loading"))
+   if (userInfo.status === "loading")
       return (
          <div className="flex items-center h-screen justify-center">
             <img src={loadingGif} />
